@@ -8,4 +8,6 @@ add_executable(SegundoProyecto main.cpp
         Room.cpp
         Direction.h
         Item.h
-        Item.cpp)
+        Item.cpp
+        Event.cpp
+        Event.h)
