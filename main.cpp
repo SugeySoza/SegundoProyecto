@@ -2,6 +2,7 @@
 
 #include "Item.h"
 #include "Player.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -21,6 +22,9 @@ int main () {
     delete i1;
     delete i2;
     delete i3;
+
+    auto e1 = make_unique<Enemy>("9999", "TestEnemy", "0001", 120, 40 );
+    cout << e1 -> toString() << endl;
 
     return 1;
 }
