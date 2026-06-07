@@ -6,6 +6,7 @@
 #define SEGUNDOPROYECTO_EVENT_H
 
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
