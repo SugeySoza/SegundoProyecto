@@ -12,6 +12,10 @@ description( description ),
 value( value )
 {}
 
+void Event::excecute(Player player) {
+// to do
+}
+
 void Event::trigger() { triggered != triggered; }
 
 bool Event::isTriggered() { return triggered; }
