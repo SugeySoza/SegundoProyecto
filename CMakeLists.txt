@@ -12,4 +12,6 @@ add_executable(SegundoProyecto main.cpp
         Event.cpp
         Event.h
         Player.cpp
-        Player.h)
+        Player.h
+        Enemy.cpp
+        Enemy.h)

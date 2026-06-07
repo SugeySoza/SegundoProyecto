@@ -12,25 +12,9 @@ description( description ),
 value( value )
 {}
 
-void Event::excecute(Player player) {
-// to do
+void Event::trigger()
+{
+    cout << "Has been triggered" << endl;
 }
 
-void Event::trigger() { triggered != triggered; }
-
-bool Event::isTriggered() { return triggered; }
-
-string Event::getRoomId() { return roomId; }
-
-string Event::toString() {
-    stringstream s;
-    s << "--- Event ---" << endl;
-    s << "Id            :   " << id << endl;
-    s << "RoomId        :   " << roomId << endl;
-    s << "Type          :   " << type << endl;
-    s << "Description   :   " << description << endl;
-    s << "Value         :   " << value << endl;
-    s << "Triggered     :   " << triggered << endl;
-
-    return s.str();
-}
+bool Even
