@@ -1,16 +1,26 @@
-    #include <iostream>
+#include <iostream>
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+#include "Item.h"
+#include "Player.h"
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
-    }
+using namespace std;
 
-    return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
+int main () {
+
+    auto i1 = new Item ("111", "test1", "0001", "Test", 1000, true );
+    auto i2 = new Item ("222", "test2", "0001", "Test", 1000, true );
+    auto i3 = new Item ("333", "test3", "0001", "Test", 1000, true );
+
+    auto p1 = make_unique<Player>("PlayerTest", 100, 100, 30, "0001");
+    p1 -> addItem(i1);
+    p1 -> addItem(i2);
+    p1 -> addItem(i3);
+
+    cout << p1 -> toString() << endl;
+
+    delete i1;
+    delete i2;
+    delete i3;
+
+    return 1;
 }

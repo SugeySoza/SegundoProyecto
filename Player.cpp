@@ -20,7 +20,10 @@ void Player::heal(int amount) { this -> health += amount; }
 
 void Player::increaseAttack(int amount) { this -> attack += attack; }
 
-void Player::addItem(Item *item) { invertory.push_back(shared_ptr<Item> (item));}
+void Player::addItem(Item *item) {
+    if (currentRoomId ==item -> getRoomId())
+    invertory.push_back(shared_ptr<Item> (item));
+}
 
 bool Player::isAlive() {
     if (health <= 0)
@@ -34,5 +37,18 @@ string Player::toString() {
     stringstream s;
 
     s << "--- Player ---" << endl;
+    s << "Name          :       " << name << endl;
+    s << "MaxHealth     :       " << maxHealth << endl;
+    s << "Attack        :       " << attack << endl;
+    s << "Score         :       " << score << endl;
+    s << "CurrentRoomId :       " << currentRoomId << endl;
+    s << endl << "intentory : " << endl;
 
+     for (const auto& item : invertory) {
+         if (item != nullptr ) {
+             s << "└--" << item->tostring() << endl;
+         }
+     }
+
+    return s.str();
 }
