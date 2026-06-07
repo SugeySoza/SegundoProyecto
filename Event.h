@@ -8,9 +8,9 @@
 #include <iostream>
 #include <sstream>
 
-using namespace std;
+#include "Player.h"
 
-class Player{}; // temporaly
+using namespace std;
 
 class Event
 {
