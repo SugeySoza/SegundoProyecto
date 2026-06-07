@@ -10,4 +10,6 @@ add_executable(SegundoProyecto main.cpp
         Item.h
         Item.cpp
         Event.cpp
-        Event.h)
+        Event.h
+        Player.cpp
+        Player.h)
