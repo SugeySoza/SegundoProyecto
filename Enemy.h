@@ -7,11 +7,10 @@
 
 #include <iostream>
 #include <sstream>
-#include <memory>
-
-#include "Player.h"
 
 using namespace std;
+
+class Player;
 
 class Enemy
 {
@@ -25,12 +24,15 @@ private:
 
 public:
     Enemy(string id, string name, string roomId, int health, int attack);
-
-    void attackPlayer (Player* player);
+    void attackPlayer (Player& player);
     void takeDamage (int amount);
     bool isDefeated ();
-    string getRoomId ();
-    string toString ();
+    string getId() const;
+    string getName() const;
+    string getRoomId() const;
+    int getHealth() const;
+    int getAttack() const;
+    string toString () const;
 };
 
 

@@ -1,0 +1,3 @@
+R1|Entrance|Main entrance of the adventure|R2|NONE|NONE|NONE|false
+R2|Forest|A dark and dangerous forest|NONE|R1|R3|NONE|false
+R3|Temple|The final ancient temple|NONE|NONE|NONE|R2|true

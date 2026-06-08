@@ -1,9 +1,9 @@
+#ifndef SEGUNDOPROYECTO_ROOM_H
+#define SEGUNDOPROYECTO_ROOM_H
+
 #include<iostream>
 #include"Direction.h"
 using namespace std;
-
-#ifndef SEGUNDOPROYECTO_ROOM_H
-#define SEGUNDOPROYECTO_ROOM_H
 
 class Room {
 private:
@@ -18,14 +18,15 @@ private:
 
 public:
     Room (string id,string name,string description);
-    void setExit(Direction direction,string roomId);
-    string getExit(Direction direction);
-    bool hasExit(Direction direction);
+    void setExit(Direction direction,const string& roomId);
+    string getExit(Direction direction) const;
+    bool hasExit(Direction direction) const;
     void setGoal(bool goal);
-    bool isGoalRoom();
-    string getId();
-    string getName();
-    string toString();
+    bool isGoalRoom() const;
+    string getId() const;
+    string getName() const;
+    string getDescription() const;
+    string toString() const;
 
 };
 

@@ -7,43 +7,47 @@ Room::Room (string id,string name,string description) {
     this->id=id;
     this->name=name;
     this->description=description;
+    northId="";
+    southId="";
+    eastId="";
+    westId="";
+    goal=false;
 
 }
-void Room ::setExit(Direction direction,string roomId) {
+void Room ::setExit(Direction direction, const string& roomId) {
     switch (direction) {
-        case NORTH:
+        case Direction::NORTH:
             northId=roomId;
             break;
-        case SOUTH:
+        case Direction::SOUTH:
             southId=roomId;
             break;
-        case EAST:
+        case Direction::EAST:
             eastId=roomId;
             break;
-        case WEST:
+        case Direction::WEST:
             westId=roomId;
             break;
 
-
-
     }
 }
-string Room:: getExit(Direction direction) {
+string Room:: getExit(Direction direction)const {
     switch (direction) {
-        case NORTH:
+        case Direction::NORTH:
             return northId;
-        case SOUTH:
+        case Direction::SOUTH:
             return southId;
-        case EAST:
+        case Direction::EAST:
             return eastId;
-        case WEST:
+        case Direction::WEST:
             return westId;
     }
     return "";
 
 }
-bool Room:: hasExit(Direction direction) {
-    switch (direction) {
+bool Room:: hasExit(Direction direction)const {
+    return !getExit(direction).empty();
+   /* switch (direction) {
         case NORTH:
             return !northId.empty();
         case SOUTH:
@@ -53,38 +57,42 @@ bool Room:: hasExit(Direction direction) {
         case WEST:
             return !westId.empty();
     }
-
+    */
 }
 void Room:: setGoal(bool goal) {
     this->goal=goal;
-
 }
-    bool Room:: isGoalRoom() {
-        if (goal) {
-            return true;
-        }
-        return false;
 
-    }
-string Room:: getId() {
+bool Room::isGoalRoom() const {
+    return goal;
+}
+
+string Room::getId() const {
     return id;
 }
-string Room:: getName() {
+
+string Room::getName() const {
     return name;
 }
-string Room:: toString() {
-    stringstream ss;
 
-    ss<<"***********ROOM INFORMATION*********"<<endl;
-    ss<<"Room Id: "<<id<<endl;
-    ss<<"Room Name: "<<name<<endl;
-    ss<<"Room Description: "<<description<<endl;
-    ss<<"North: "<<northId<<endl;
-    ss<<"South: "<<southId<<endl;
-    ss<<"East: "<<eastId<<endl;
-    ss<<"West: "<<westId<<endl;
-    ss<<"Goal Room"<<goal<<endl;
-    ss<<"*************************************"<<endl;
-    return ss.str();
+string Room::getDescription() const {
+    return description;
+}
+
+
+string Room:: toString()const {
+    stringstream s;
+
+    s<<"***********ROOM INFORMATION*********"<<endl;
+    s<<"Room Id: "<<id<<endl;
+    s<<"Room Name: "<<name<<endl;
+    s<<"Room Description: "<<description<<endl;
+    s<<"North:"<<(northId.empty()? "No exit":northId)<<endl;
+    s<<"South:"<<(southId.empty()? "No exit":southId)<<endl;
+    s<<"East:"<<(eastId.empty()? "No exit":eastId)<<endl;
+    s<<"West:"<<(westId.empty()? "No exit":westId)<<endl;
+    s<<"Goal room: "<<(goal ? "Yes" : "No")<<endl;
+    s<<"*************************************"<<endl;
+    return s.str();
 
 }

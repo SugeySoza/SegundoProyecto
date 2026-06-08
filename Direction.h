@@ -4,13 +4,11 @@
 
 #ifndef SEGUNDOPROYECTO_DIRECTION_H
 #define SEGUNDOPROYECTO_DIRECTION_H
-enum Direction {
+enum class Direction {
     NORTH,
     SOUTH,
     EAST,
-    WEST,
-
-
+    WEST
 };
 
 #endif //SEGUNDOPROYECTO_DIRECTION_H

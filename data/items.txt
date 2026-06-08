@@ -1,0 +1,3 @@
+I1|Potion|R1|HEALTH|20
+I2|Sword|R2|ATTACK|5
+I3|Treasure|R3|SCORE|50

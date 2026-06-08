@@ -22,19 +22,24 @@ private:
     int attack;
     int score;
     string currentRoomId;
-    vector <shared_ptr<Item>> invertory;
+    vector <shared_ptr<Item>> inventory;
 
 public:
-    Player ( string name, int health, int maxHealth, int attack, string currentRoomId );
-
-    void moveTo ( string roomId );
-    void takeDamage ( int amount );
-    void heal ( int amount );
-    void increaseAttack ( int amount );
-    void addItem ( Item* item);
-    bool isAlive ();
-    string getCurrentRoomId();
-    string toString();
+    Player (string name, int health, int maxHealth, int attack,string currentRoomId);
+    void moveTo (const string& roomId);
+    void takeDamage (int amount);
+    void heal (int amount);
+    void increaseAttack (int amount);
+    void increaseScore (int amount);
+    void addItem (const shared_ptr<Item>& item);
+    bool isAlive () const;
+    string getName() const;
+    int getHealth () const;
+    int getMaxHealth () const;
+    int getAttack() const;
+    int getScore () const;
+    string getCurrentRoomId() const;
+    string toString() const;
 };
 
 

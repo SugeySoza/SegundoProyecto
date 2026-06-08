@@ -1,0 +1,3 @@
+EV1|R1|SCORE|You found a hidden clue|10
+EV2|R2|DAMAGE|A trap was activated|15
+EV3|R3|HEALTH|A magical fountain restored your health|20

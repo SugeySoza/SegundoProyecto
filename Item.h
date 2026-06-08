@@ -16,12 +16,16 @@ private:
     bool collected;
 
 public:
-    Item(string id,string name,string roomId,string type,int value,bool collected);
+    Item(string id,string name,string roomId,string type,int value);
     void applyEffect (Player& player);
     void collect();
-    bool isCollected();
-    string getRoomId();
-    string tostring();
+    bool isCollected() const;
+    string getId() const;
+    string getName() const;
+    string getRoomId() const;
+    string getType() const;
+    int getValue() const;
+    string toString() const;
 
 
 };

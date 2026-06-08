@@ -4,36 +4,78 @@
 
 #include "Player.h"
 
-Player::Player(string name, int health, int maxHealth, int attack, string currentRoomId) :
-name ( name ),
-health (health ),
-maxHealth( maxHealth ),
-attack ( attack ),
-currentRoomId( currentRoomId )
-{}
-
-void Player::moveTo(string roomId) { this -> currentRoomId = roomId; }
-
-void Player::takeDamage(int amount) { this -> health -= amount; }
-
-void Player::heal(int amount) { this -> health += amount; }
-
-void Player::increaseAttack(int amount) { this -> attack += attack; }
-
-void Player::addItem(Item *item) {
-    if (currentRoomId ==item -> getRoomId())
-    invertory.push_back(shared_ptr<Item> (item));
+Player::Player(string name, int health, int maxHealth, int attack, string currentRoomId) {
+    this -> name = name;
+    this -> health = health;
+    this -> maxHealth = maxHealth;
+    this -> attack = attack;
+    this->score = 0;
+    this -> currentRoomId = currentRoomId;
 }
 
-bool Player::isAlive() {
-    if (health <= 0)
-        return false;
-    return true;
+void Player::moveTo(const string& roomId) { this -> currentRoomId = roomId; }
+
+void Player::takeDamage(int amount) {
+    if (amount <= 0)
+        return;
+    health -= amount;
+    if (health < 0) {
+        health = 0;
+    }
 }
 
-string Player::getCurrentRoomId() { return currentRoomId; }
+void Player::heal(int amount) {
+    if (amount <= 0)
+        return;
+    health += amount;
+    if (health > maxHealth) {
+        health = maxHealth;
+    }
+}
 
-string Player::toString() {
+void Player::increaseAttack(int amount) {
+    if (amount > 0)
+        attack+=amount;
+}
+
+void Player::increaseScore(int amount) {
+    if (amount > 0)
+        score+=amount;
+}
+
+void Player::addItem(const shared_ptr<Item>& item) {
+    if (item == nullptr)
+        return;
+    inventory.push_back(item);
+}
+
+bool Player::isAlive() const {
+    return health > 0;
+}
+
+string Player::getName() const {
+    return name;
+}
+
+int Player::getHealth() const {
+    return health;
+}
+
+int Player::getMaxHealth() const {
+    return maxHealth;
+}
+
+int Player::getAttack() const {
+    return attack;
+}
+
+int Player::getScore() const {
+    return score;
+}
+
+string Player::getCurrentRoomId()const { return currentRoomId; }
+
+string Player::toString()const {
     stringstream s;
 
     s << "--- Player ---" << endl;
@@ -41,14 +83,16 @@ string Player::toString() {
     s << "MaxHealth     :       " << maxHealth << endl;
     s << "Attack        :       " << attack << endl;
     s << "Score         :       " << score << endl;
-    s << "CurrentRoomId :       " << currentRoomId << endl;
-    s << endl << "intentory : " << endl;
+    s << "CurrentRoom   :       " << currentRoomId << endl;
 
-     for (const auto& item : invertory) {
-         if (item != nullptr ) {
-             s << "└--" << item->tostring() << endl;
-         }
-     }
-
+    s << endl << "invtentory : " << endl;
+    if (inventory.empty()) {
+        s<<"Empty inventory" << endl;
+    }else
+        for (const auto i : inventory) {
+            if (i != nullptr) {
+                s<<"-"<<i->toString()<<endl;
+            }
+        }
     return s.str();
 }

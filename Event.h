@@ -8,9 +8,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "Player.h"
-
 using namespace std;
+
+class Player;
 
 class Event
 {
@@ -23,12 +23,15 @@ class Event
 
 public:
     Event (string id, string roomId, string type, string description, int value);
-
-    void excecute(Player player);
+    void execute(Player& player);
     void trigger();
-    bool isTriggered();
-    string getRoomId();
-    string toString();
+    bool isTriggered()const;
+    string getId() const;
+    string getRoomId() const;
+    string getType() const;
+    string getDescription() const;
+    int getValue() const;
+    string toString() const;
 
 
 

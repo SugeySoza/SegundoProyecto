@@ -14,4 +14,11 @@ add_executable(SegundoProyecto main.cpp
         Player.cpp
         Player.h
         Enemy.cpp
-        Enemy.h)
+        Enemy.h
+        World.cpp
+        World.h
+        FileManager.cpp
+        FileManager.h
+)
+file(COPY ${CMAKE_SOURCE_DIR}/data
+        DESTINATION ${CMAKE_BINARY_DIR})

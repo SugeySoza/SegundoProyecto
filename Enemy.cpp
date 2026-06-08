@@ -4,22 +4,58 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(string id, string name, string roomId, int health, int attack) :
-id (id),
-name (name),
-roomId (roomId),
-health (health),
-attack (attack)
-{}
+#include "Player.h"
 
-void Enemy::attackPlayer(Player* player) { player -> takeDamage(attack); }
+Enemy::Enemy(string id, string name, string roomId, int health, int attack) {
+    this->id = id;
+    this->name = name;
+    this->roomId = roomId;
+    this->health = health;
+    this->attack = attack;
+    defeated = false;
+}
 
-bool Enemy::isDefeated() { return defeated; }
+void Enemy::attackPlayer(Player& player) {
+    if (defeated)
+        return;
+    player.takeDamage(attack);
+}
 
-string Enemy::getRoomId() { return roomId; }
+void Enemy::takeDamage(int amount) {
+    if (amount <= 0 || defeated)
+        return;
+    health -=amount;
+    if (health <= 0) {
+        health = 0;
+        defeated = true;
+    }
+}
 
-string Enemy::toString()
-{
+bool Enemy::isDefeated() {
+    return defeated;
+}
+
+string Enemy::getId() const {
+    return id;
+}
+
+string Enemy::getName() const {
+    return name;
+}
+
+string Enemy::getRoomId() const {
+    return roomId;
+}
+
+int Enemy::getHealth() const {
+    return health;
+}
+
+int Enemy::getAttack() const {
+    return attack;
+}
+
+string Enemy::toString() const{
     stringstream s;
     s << "--- Enemy ---" << endl;
     s << "ID        :       " << id << endl;
@@ -27,6 +63,6 @@ string Enemy::toString()
     s << "RoomId    :       " << roomId << endl;
     s << "Health    :       " << health << endl;
     s << "Attack    :       " << attack << endl;
-    s << "Defeated  :       " << defeated << endl;
+    s << "Defeated  :       " << (defeated ? "Yes": "No") <<endl;
     return s.str();
 }

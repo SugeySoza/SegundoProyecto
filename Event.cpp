@@ -4,35 +4,69 @@
 
 #include "Event.h"
 
-Event::Event(string id, string roomId, string type, string description, int value) :
-id (id ),
-roomId(roomId ),
-type ( type ),
-description( description ),
-value( value )
-{}
+#include "Player.h"
 
-void Event::excecute(Player player)
+Event::Event(string id, string roomId, string type, string description, int value) {
+    this->id = id;
+    this->roomId = roomId;
+    this->type = type;
+    this->description = description;
+    this->value = value;
+    triggered = false;
+}
+
+void Event::execute(Player& player)
 {
-    // on besoin de faire
+    if (triggered) {
+        return;
+    }
+    if (type == "HEALTH") {
+       player.heal(value);
+    }
+    if (type == "DAMAGE") {
+        player.takeDamage(value);
+    }
+    if (type == "ATTACK") {
+        player.increaseAttack(value);
+    }
+    if (type == "SCORE") {
+        player.increaseScore(value);
+    }
+
+    trigger();
 }
 
 void Event::trigger()
 {
-    triggered != triggered;
+    triggered = true;
 }
 
-bool Event::isTriggered()
-{
+bool Event::isTriggered()const {
     return triggered;
 }
 
-string Event::getRoomId()
-{
+string Event::getId() const {
+    return id;
+}
+
+string Event::getRoomId() const {
     return roomId;
 }
 
-string Event::toString() {
+string Event::getType() const {
+    return type;
+}
+
+string Event::getDescription() const {
+    return description;
+}
+
+int Event::getValue() const {
+    return value;
+}
+
+
+string Event::toString() const{
     stringstream s;
     s << "--- Event ---" << endl;
     s << "Id            :   " << id << endl;
