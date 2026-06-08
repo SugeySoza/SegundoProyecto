@@ -19,6 +19,8 @@ add_executable(SegundoProyecto main.cpp
         World.h
         FileManager.cpp
         FileManager.h
+        EntityFactory.cpp
+        EntityFactory.h
 )
 file(COPY ${CMAKE_SOURCE_DIR}/data
         DESTINATION ${CMAKE_BINARY_DIR})
