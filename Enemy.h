@@ -27,12 +27,12 @@ public:
     void attackPlayer (Player& player);
     void takeDamage (int amount);
     bool isDefeated ();
-    string getId() const;
-    string getName() const;
-    string getRoomId() const;
-    int getHealth() const;
-    int getAttack() const;
-    string toString () const;
+    string getId() ;
+    string getName() ;
+    string getRoomId() ;
+    int getHealth() ;
+    int getAttack() ;
+    string toString () ;
 };
 
 

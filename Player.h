@@ -26,20 +26,20 @@ private:
 
 public:
     Player (string name, int health, int maxHealth, int attack,string currentRoomId);
-    void moveTo (const string& roomId);
+    void moveTo ( string& roomId);
     void takeDamage (int amount);
     void heal (int amount);
     void increaseAttack (int amount);
     void increaseScore (int amount);
-    void addItem (const shared_ptr<Item>& item);
-    bool isAlive () const;
-    string getName() const;
-    int getHealth () const;
-    int getMaxHealth () const;
-    int getAttack() const;
-    int getScore () const;
-    string getCurrentRoomId() const;
-    string toString() const;
+    void addItem ( shared_ptr<Item>& item);
+    bool isAlive () ;
+    string getName() ;
+    int getHealth () ;
+    int getMaxHealth () ;
+    int getAttack() ;
+    int getScore () ;
+    string getCurrentRoomId() ;
+    string toString() ;
 };
 
 

@@ -1,68 +1,77 @@
-//
-// Created by XPC on 7/6/2026.
-//
-
 #include "World.h"
+#include <algorithm>
 
-void World::addRoom(const shared_ptr<Room> &room) {
-    if (room != nullptr) {
+template<typename T, typename Predicate>
+static std::vector<std::shared_ptr<T>> filterEntities(
+    const std::vector<std::shared_ptr<T>>& entities,
+    Predicate predicate)
+{
+    std::vector<std::shared_ptr<T>> result;
+    result.reserve(entities.size());
+
+    for (const auto& entity : entities) {
+        if (entity && predicate(entity)) {
+            result.push_back(entity);
+        }
+    }
+
+    return result;
+}
+
+void World::addRoom(const std::shared_ptr<Room>& room) {
+    if (room)
         rooms.push_back(room);
-    }
 }
 
-void World::addItem(const shared_ptr<Item> &item) {
-    if (item != nullptr) {
+void World::addItem(const std::shared_ptr<Item>& item) {
+    if (item)
         items.push_back(item);
-    }
 }
 
-void World::addEnemy(const shared_ptr<Enemy> &enemy) {
-    if (enemy != nullptr) {
+void World::addEnemy(const std::shared_ptr<Enemy>& enemy) {
+    if (enemy)
         enemies.push_back(enemy);
-    }
 }
 
-void World::addEvent(const shared_ptr<Event> &event) {
-    if (event != nullptr) {
+void World::addEvent(const std::shared_ptr<Event>& event) {
+    if (event)
         events.push_back(event);
-    }
 }
 
-shared_ptr<Room> World::getRoomById(const string &id) const {
-    for (const shared_ptr<Room>& room : rooms) {
-        if (room != nullptr && room->getId() == id) {
-            return room;
-        }
-    }
-    return nullptr;
+std::shared_ptr<Room> World::getRoomById(const std::string& id) const {
+    auto it = std::find_if(
+        rooms.begin(),
+        rooms.end(),
+        [&id](const auto& room) {
+            return room && room->getId() == id;
+        });
+
+    return (it != rooms.end()) ? *it : nullptr;
 }
 
-vector<shared_ptr<Item>> World::getItemsInRoom(const string &roomId) const {
-    vector<shared_ptr<Item>> roomItems;
-    for (const shared_ptr<Item>& item : items) {
-        if (item != nullptr && item->getRoomId() == roomId && !item->isCollected()) {
-            roomItems.push_back(item);
-        }
-    }
-    return roomItems;
+std::vector<std::shared_ptr<Item>> World::getItemsInRoom(const std::string& roomId) const {
+    return filterEntities<Item>(
+        items,
+        [&roomId](const auto& item) {
+            return item->getRoomId() == roomId &&
+                   !item->isCollected();
+        });
 }
 
-vector<shared_ptr<Enemy>> World::getEnemiesInRoom(const string &roomId) const {
-    vector<shared_ptr<Enemy>> roomEnemies;
-    for (const shared_ptr<Enemy>& enemy : enemies) {
-        if (enemy != nullptr && enemy->getRoomId() == roomId && !enemy->isDefeated()) {
-            roomEnemies.push_back(enemy);
-        }
-    }
-    return roomEnemies;
+std::vector<std::shared_ptr<Enemy>> World::getEnemiesInRoom(const std::string& roomId) const {
+    return filterEntities<Enemy>(
+        enemies,
+        [&roomId](const auto& enemy) {
+            return enemy->getRoomId() == roomId &&
+                   !enemy->isDefeated();
+        });
 }
 
-vector<shared_ptr<Event>> World::getEventsInRoom(const string &roomId) const {
-    vector<shared_ptr<Event>> roomEvents;
-    for (const shared_ptr<Event>& event : events) {
-        if (event != nullptr && event->getRoomId() == roomId && !event->isTriggered()) {
-            roomEvents.push_back(event);
-        }
-    }
-    return roomEvents;
+std::vector<std::shared_ptr<Event>> World::getEventsInRoom(const std::string& roomId) const {
+    return filterEntities<Event>(
+        events,
+        [&roomId](const auto& event) {
+            return event->getRoomId() == roomId &&
+                   !event->isTriggered();
+        });
 }

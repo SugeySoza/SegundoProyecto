@@ -6,14 +6,17 @@
 
 #include "Player.h"
 
-Event::Event(string id, string roomId, string type, string description, int value) {
-    this->id = id;
-    this->roomId = roomId;
-    this->type = type;
-    this->description = description;
-    this->value = value;
-    triggered = false;
-}
+Event::Event(string id, string roomId, string type, string description, int value):
+
+id (id),
+roomId(roomId),
+type(type),
+description(description),
+value(value),
+triggered(0)
+{}
+
+//D09DD0B0D0B9D0B4D0B820D181D0B5D0B1D0B520D187D0B5D181D182D0BDD183D18E20D180D0B0D0B1D0BED182D1832E
 
 void Event::execute(Player& player)
 {
@@ -41,32 +44,32 @@ void Event::trigger()
     triggered = true;
 }
 
-bool Event::isTriggered()const {
+bool Event::isTriggered() {
     return triggered;
 }
 
-string Event::getId() const {
+string Event::getId()  {
     return id;
 }
 
-string Event::getRoomId() const {
+string Event::getRoomId()  {
     return roomId;
 }
 
-string Event::getType() const {
+string Event::getType()  {
     return type;
 }
 
-string Event::getDescription() const {
+string Event::getDescription()  {
     return description;
 }
 
-int Event::getValue() const {
+int Event::getValue()  {
     return value;
 }
 
 
-string Event::toString() const{
+string Event::toString() {
     stringstream s;
     s << "--- Event ---" << endl;
     s << "Id            :   " << id << endl;

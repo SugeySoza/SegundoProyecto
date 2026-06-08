@@ -4,16 +4,16 @@
 
 #include "Player.h"
 
-Player::Player(string name, int health, int maxHealth, int attack, string currentRoomId) {
-    this -> name = name;
-    this -> health = health;
-    this -> maxHealth = maxHealth;
-    this -> attack = attack;
-    this->score = 0;
-    this -> currentRoomId = currentRoomId;
-}
+Player::Player(string name, int health, int maxHealth, int attack, string currentRoomId) :
+name (name),
+health (health),
+maxHealth(maxHealth),
+attack(attack),
+score(0),
+currentRoomId(currentRoomId)
+{}
 
-void Player::moveTo(const string& roomId) { this -> currentRoomId = roomId; }
+void Player::moveTo( string& roomId) { this -> currentRoomId = roomId; }
 
 void Player::takeDamage(int amount) {
     if (amount <= 0)
@@ -43,39 +43,39 @@ void Player::increaseScore(int amount) {
         score+=amount;
 }
 
-void Player::addItem(const shared_ptr<Item>& item) {
+void Player::addItem( shared_ptr<Item>& item) {
     if (item == nullptr)
         return;
     inventory.push_back(item);
 }
 
-bool Player::isAlive() const {
+bool Player::isAlive()  {
     return health > 0;
 }
 
-string Player::getName() const {
+string Player::getName()  {
     return name;
 }
 
-int Player::getHealth() const {
+int Player::getHealth()  {
     return health;
 }
 
-int Player::getMaxHealth() const {
+int Player::getMaxHealth()  {
     return maxHealth;
 }
 
-int Player::getAttack() const {
+int Player::getAttack()  {
     return attack;
 }
 
-int Player::getScore() const {
+int Player::getScore()  {
     return score;
 }
 
-string Player::getCurrentRoomId()const { return currentRoomId; }
+string Player::getCurrentRoomId() { return currentRoomId; }
 
-string Player::toString()const {
+string Player::toString() {
     stringstream s;
 
     s << "--- Player ---" << endl;
@@ -86,13 +86,15 @@ string Player::toString()const {
     s << "CurrentRoom   :       " << currentRoomId << endl;
 
     s << endl << "invtentory : " << endl;
-    if (inventory.empty()) {
-        s<<"Empty inventory" << endl;
-    }else
+    if (!inventory.empty()) {
         for (const auto i : inventory) {
             if (i != nullptr) {
-                s<<"-"<<i->toString()<<endl;
+                s<<"└--"<<i->toString()<<endl;
             }
         }
+    }else {
+        s<<"Empty inventory" << endl;
+    }
+
     return s.str();
 }

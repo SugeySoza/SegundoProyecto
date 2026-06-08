@@ -25,13 +25,13 @@ public:
     Event (string id, string roomId, string type, string description, int value);
     void execute(Player& player);
     void trigger();
-    bool isTriggered()const;
-    string getId() const;
-    string getRoomId() const;
-    string getType() const;
-    string getDescription() const;
-    int getValue() const;
-    string toString() const;
+    bool isTriggered();
+    string getId() ;
+    string getRoomId() ;
+    string getType() ;
+    string getDescription() ;
+    int getValue() ;
+    string toString() ;
 
 
 
